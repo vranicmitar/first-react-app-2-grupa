@@ -4,6 +4,8 @@ import Greeting from "./components/Greetings/Greeting";
 import { Navbar } from "./components/Navbar/Navbar";
 import PersonCard from "./components/Cards/PersonCard/PersonCard";
 import persons from "./common/persons.json";
+import hotels from "./common/hotels.json";
+import HotelCard from "./components/Cards/HotelCard/HotelCard";
 
 // const persons = [
 //   {
@@ -48,6 +50,9 @@ function App() {
     setCount(count - 1);
   };
   // const x = 10;
+
+  const [name, setName] = useState("");
+  // console.log(name);
   return (
     //  React.createElement("p", {}, "Neki paragraf");
     <>
@@ -125,6 +130,89 @@ function App() {
               +
             </button>
           </div>
+        </div>
+        <div className="hotels">
+          {hotels.map((hotel) => (
+            <HotelCard
+              imageURL={hotel.imageURL}
+              name={hotel.name}
+              stars={hotel.stars}
+              description={hotel.description}
+              rating={hotel.rating}
+              reviews={hotel.reviews}
+            />
+          ))}
+        </div>
+        <div className="formContainer">
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <label htmlFor="firstName">Unesite vase ime</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+              // innerText={"ime"}
+              value={name}
+              onChange={(event) => {
+                console.log(event);
+                setName(event.target.value);
+              }}
+            />
+            <br />
+            <br />
+
+            <label htmlFor="lastName">Unesite vase prezime</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+              value={"ime"}
+              onChange={() => {}}
+            />
+            <br />
+            <br />
+
+            <label htmlFor="email">Unesite vasu email adresu</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              value={"ime"}
+              onChange={() => {}}
+            />
+            <br />
+            <br />
+
+            <label htmlFor="hobi">Unesite vas hobi</label>
+            <input
+              type="text"
+              id="hobi"
+              name="hobi"
+              value={"ime"}
+              onChange={() => {}}
+            />
+            <br />
+            <br />
+
+            <label htmlFor="phone">Unesite vas broj telefona</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={"ime"}
+              onChange={() => {}}
+            />
+            <br />
+            <br />
+
+            <button type="submit">Potvrdi</button>
+          </form>
         </div>
       </div>
     </>
