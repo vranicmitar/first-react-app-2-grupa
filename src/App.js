@@ -5,7 +5,10 @@ import { Navbar } from "./components/Navbar/Navbar";
 import PersonCard from "./components/Cards/PersonCard/PersonCard";
 import persons from "./common/persons.json";
 import hotels from "./common/hotels.json";
+import teams from "./common/teams.json";
 import HotelCard from "./components/Cards/HotelCard/HotelCard";
+import Form from "./components/Form/Form";
+import TeamCard from "./components/Cards/TeamCard/TeamCard";
 
 // const persons = [
 //   {
@@ -39,9 +42,19 @@ import HotelCard from "./components/Cards/HotelCard/HotelCard";
 //   },
 // ];
 
+const poruke = [
+  "Danas je subota",
+  "U subotu je lepo vreme",
+  "Subota je dan za odmor",
+  "Subota je dan za kupovinu",
+  "Subota je dan za druzenje",
+  "Subota je dan za kafu",
+];
+
 function App() {
   // const [count, setCount] = React.useState(0);
   const [count, setCount] = useState(0);
+  const [arr, setArr] = useState(poruke);
   // setCount je metoda pomocu koje menjamo vrednost count state_a:
   const increaseCount = () => {
     setCount(count + 1);
@@ -51,8 +64,12 @@ function App() {
   };
   // const x = 10;
 
-  const [name, setName] = useState("");
-  // console.log(name);
+  const reverseArr = () => {
+    const _arr = [...arr];
+    const reversed = _arr.reverse();
+    setArr(reversed);
+  };
+
   return (
     //  React.createElement("p", {}, "Neki paragraf");
     <>
@@ -108,6 +125,7 @@ function App() {
           /> */}
           {persons.map((person) => (
             <PersonCard
+              key={person.id}
               imageURL={person.imageURL}
               fullName={person.fullName}
               location={person.location}
@@ -134,6 +152,7 @@ function App() {
         <div className="hotels">
           {hotels.map((hotel) => (
             <HotelCard
+              key={hotel.id}
               imageURL={hotel.imageURL}
               name={hotel.name}
               stars={hotel.stars}
@@ -143,77 +162,33 @@ function App() {
             />
           ))}
         </div>
-        <div className="formContainer">
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
+        <Form />
+        <div
+          style={{
+            height: "200px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          <button
+            onClick={() => {
+              reverseArr();
+              console.log("okrenuo se niz");
             }}
           >
-            <label htmlFor="firstName">Unesite vase ime</label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              required
-              // innerText={"ime"}
-              value={name}
-              onChange={(event) => {
-                console.log(event);
-                setName(event.target.value);
-              }}
-            />
-            <br />
-            <br />
-
-            <label htmlFor="lastName">Unesite vase prezime</label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              required
-              value={"ime"}
-              onChange={() => {}}
-            />
-            <br />
-            <br />
-
-            <label htmlFor="email">Unesite vasu email adresu</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              value={"ime"}
-              onChange={() => {}}
-            />
-            <br />
-            <br />
-
-            <label htmlFor="hobi">Unesite vas hobi</label>
-            <input
-              type="text"
-              id="hobi"
-              name="hobi"
-              value={"ime"}
-              onChange={() => {}}
-            />
-            <br />
-            <br />
-
-            <label htmlFor="phone">Unesite vas broj telefona</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={"ime"}
-              onChange={() => {}}
-            />
-            <br />
-            <br />
-
-            <button type="submit">Potvrdi</button>
-          </form>
+            Promeni raspored poruka
+          </button>
+          {arr.map((poruka) => (
+            <p>{poruka}</p>
+          ))}
         </div>
+        <TeamCard />
+        <TeamCard />
+        <TeamCard />
+        <TeamCard />
       </div>
     </>
   );

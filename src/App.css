@@ -4,10 +4,3 @@
   grid-auto-rows: minmax(40%, auto);
   justify-items: center;
 }
-
-.formContainer {
-  width: 70%;
-  margin: auto;
-  margin-top: 150px;
-  margin-bottom: 50px;
-}
