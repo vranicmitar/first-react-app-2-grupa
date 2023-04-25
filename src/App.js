@@ -9,6 +9,9 @@ import teamsJSON from "./common/teams.json";
 import HotelCard from "./components/Cards/HotelCard/HotelCard";
 import Form from "./components/Form/Form";
 import TeamCard from "./components/Cards/TeamCard/TeamCard";
+import QuoteCard from "./components/Cards/QuoteCard/QuoteCard";
+import Pagination from "./components/Pagination/Pagination";
+import { Route, Routes } from "react-router-dom";
 
 // const persons = [
 //   {
@@ -81,7 +84,10 @@ function App() {
     setTeams(filteredTeams);
   };
   const [quotes, setQuotes] = useState([]);
-  const [page, setPage] = useState(5);
+  const [page, setPage] = useState(1);
+  const handlePageClick = (pageNumber) => {
+    setPage(pageNumber);
+  };
 
   const getQuotes = async () => {
     const getQuotes = await fetch(`${BASE_URL}/quotes?page=${page}`);
@@ -89,8 +95,8 @@ function App() {
     const results = data.results;
 
     setQuotes(results);
-    console.log(data);
-    // console.log(results);
+    // console.log(data);
+    console.log(results);
   };
 
   console.log(quotes[0]?.content);
@@ -104,10 +110,10 @@ function App() {
     <>
       {" "}
       {/* Fragment - najcesce se koristi za wrappovanje */}
-      <div className="App">
-        <Navbar>{/* <p>Samo za primer</p> */}</Navbar>
-        <Greeting appName={"Our First App"} username={"Bakir Ujkanovic"} />
-        <div
+      {/* <div className="App"> */}
+      {/* <Navbar><p>Samo za primer</p></Navbar>
+        <Greeting appName={"Our First App"} username={"Bakir Ujkanovic"} /> */}
+      {/* <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 250px)",
@@ -115,8 +121,8 @@ function App() {
             gridAutoRows: "minmax(420px, auto)",
             gridGap: "40px",
           }}
-        >
-          {/* <PersonCard
+        > */}
+      {/* <PersonCard
             imageURL={"https://avatars.githubusercontent.com/u/89378479?v=4"}
             fullName={"Dzenan Kosuta"}
             location={"Novi pazar, Serbia"}
@@ -152,7 +158,7 @@ function App() {
               "https://github.com/harismuslic04?tab=repositories"
             }
           /> */}
-          {persons.map((person) => (
+      {/* {persons.map((person) => (
             <PersonCard
               key={person.id}
               imageURL={person.imageURL}
@@ -161,8 +167,8 @@ function App() {
               description={person.description}
               goToRepositories={person.goToRepositories}
             />
-          ))}
-          <div>
+          ))} */}
+      {/* <div>
             <button style={{ width: "40px" }} onClick={decreaseCount}>
               -
             </button>
@@ -176,9 +182,9 @@ function App() {
             >
               +
             </button>
-          </div>
-        </div>
-        <div className="hotels">
+          </div> */}
+      {/* </div> */}
+      {/* <div className="hotels">
           {hotels.map((hotel) => (
             <HotelCard
               key={hotel.id}
@@ -190,9 +196,9 @@ function App() {
               reviews={hotel.reviews}
             />
           ))}
-        </div>
-        <Form />
-        <div
+        </div> */}
+      {/* <Form /> */}
+      {/* <div
           style={{
             height: "200px",
             display: "flex",
@@ -213,8 +219,8 @@ function App() {
           {arr.map((poruka) => (
             <p>{poruka}</p>
           ))}
-        </div>
-        {teams.map((team) => (
+        </div> */}
+      {/* {teams.map((team) => (
           <TeamCard
             key={team.id}
             name={team.name}
@@ -222,8 +228,43 @@ function App() {
             points={team.points}
             deleteTeam={() => deleteTeam(team.id)}
           />
-        ))}
-      </div>
+        ))} */}
+      {/* <div className="quote-container">
+          {quotes.map((quote) => (
+            <QuoteCard author={quote.author} content={quote.content} />
+          ))}
+        </div> */}
+      {/* <Pagination currentPage={page} handlePageClick={handlePageClick} /> */}
+      {/* </div> */}
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Form />} />
+        <Route
+          path="/about-us"
+          element={
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 250px)",
+                justifyContent: "center",
+                gridAutoRows: "minmax(420px, auto)",
+                gridGap: "40px",
+              }}
+            >
+              {persons.map((person) => (
+                <PersonCard
+                  key={person.id}
+                  imageURL={person.imageURL}
+                  fullName={person.fullName}
+                  location={person.location}
+                  description={person.description}
+                  goToRepositories={person.goToRepositories}
+                />
+              ))}
+            </div>
+          }
+        />
+      </Routes>
     </>
   );
 }
