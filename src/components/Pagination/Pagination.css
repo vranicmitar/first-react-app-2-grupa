@@ -20,7 +20,7 @@
 .page-link:hover {
   background-color: #cd7878;
 }
-.page-item active {
+.page-item {
   background-color: brown;
 }
 /* .active {
