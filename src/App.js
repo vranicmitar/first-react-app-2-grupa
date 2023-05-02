@@ -7,6 +7,7 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import Hotels from "./pages/Hotels/Hotels";
 import Teams from "./pages/Teams/Teams";
 import Quotes from "./pages/Quotes/Quotes";
+import Hotel from "./pages/hotel/Hotel";
 
 // const poruke = [
 //   "Danas je subota",
@@ -100,6 +101,7 @@ function App() {
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/teams" element={<Teams />} />
         <Route path="/quotes" element={<Quotes />} />
+        <Route path="/hotels/:id" element={<Hotel />} />
       </Routes>
     </>
   );

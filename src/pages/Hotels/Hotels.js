@@ -7,15 +7,17 @@ export default function Hotels() {
   return (
     <div className="hotels">
       {hotels.map((hotel) => (
-        <HotelCard
-          key={hotel.id}
-          imageURL={hotel.imageURL}
-          name={hotel.name}
-          stars={hotel.stars}
-          description={hotel.description}
-          rating={hotel.rating}
-          reviews={hotel.reviews}
-        />
+        <a href={"hotels/" + hotel.id.toString()}>
+          <HotelCard
+            key={hotel.id}
+            imageURL={hotel.imageURL}
+            name={hotel.name}
+            stars={hotel.stars}
+            description={hotel.description}
+            rating={hotel.rating}
+            reviews={hotel.reviews}
+          />
+        </a>
       ))}
     </div>
   );
