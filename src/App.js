@@ -9,15 +9,6 @@ import Teams from "./pages/Teams/Teams";
 import Quotes from "./pages/Quotes/Quotes";
 import Hotel from "./pages/hotel/Hotel";
 
-// const poruke = [
-//   "Danas je subota",
-//   "U subotu je lepo vreme",
-//   "Subota je dan za odmor",
-//   "Subota je dan za kupovinu",
-//   "Subota je dan za druzenje",
-//   "Subota je dan za kafu",
-// ];
-
 export const BASE_URL = "https://api.quotable.io";
 
 function App() {
