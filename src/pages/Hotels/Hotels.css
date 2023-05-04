@@ -4,3 +4,8 @@
   grid-auto-rows: minmax(40%, auto);
   justify-items: center;
 }
+
+.link {
+  color: black;
+  text-decoration: none;
+}

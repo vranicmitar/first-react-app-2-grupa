@@ -4,8 +4,9 @@
 }
 
 .first {
+  margin-top: 15px;
   /* background-color: yellow; */
-  width: 320px;
+  width: 330px;
   height: 380px;
   display: flex;
   flex-direction: column;

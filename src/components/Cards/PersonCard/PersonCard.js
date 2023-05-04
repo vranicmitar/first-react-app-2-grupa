@@ -2,23 +2,29 @@ import React from "react";
 import "./PersonCard.css";
 import { FaGithub } from "react-icons/fa";
 
-export default function PersonCard(props) {
+export default function PersonCard({
+  imageURL,
+  fullName,
+  location,
+  description,
+  goToRepositories,
+}) {
   return (
     <div className="card">
       <div className="firstPart">
-        <img src={props.imageURL} alt={"profile_img"} className="img" />
-        <h1>{props.fullname}</h1>
-        <h3>{props.location}</h3>
+        <img src={imageURL} alt={"profile_img"} className="img" />
+        <h1>{fullName}</h1>
+        <h3>{location}</h3>
       </div>
       <div className="secondPart">
-        <p>{props.description}</p>
+        <p>{description}</p>
         <a
-          href={props.goToRepositories}
+          href={goToRepositories}
           target="blank"
           style={{ color: "darkblue" }}
           className="gitHub"
         >
-          <FaGithub style={{ width: "50px", height: "50px" }} />
+          <FaGithub style={{ width: "40px", height: "40px", color: "black" }} />
         </a>
       </div>
     </div>

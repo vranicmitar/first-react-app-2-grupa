@@ -1,6 +1,5 @@
 import React from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-import "./Spinner.css";
 
 export default function Spinner({ message }) {
   return (
