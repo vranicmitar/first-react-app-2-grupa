@@ -1,5 +1,6 @@
 .card {
-  width: 250px;
+  margin-top: 75px;
+  width: 550px;
   height: 420px;
   display: flex;
   flex-direction: column;
@@ -11,9 +12,10 @@
   /* transition: transform 0.2s ease-in; */
 }
 
-/* .card:hover {
+.card:hover {
   transform: scale(1.05);
-} */
+  cursor: pointer;
+}
 
 .firstPart {
   display: flex;

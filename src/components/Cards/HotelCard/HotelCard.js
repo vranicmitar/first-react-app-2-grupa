@@ -1,9 +1,19 @@
 import React from "react";
 import "./HotelCard.css";
+import { FaStar } from "react-icons/fa";
+import { FaStarHalf } from "react-icons/fa";
 
-export default function HotelCard(props) {
-  const oneStar = <span>⭐</span>;
-  const halfStar = <span style={{ color: "yellow" }}>✩</span>;
+function HotelCard(props) {
+  const oneStar = (
+    <span>
+      <FaStar />
+    </span>
+  );
+  const halfStar = (
+    <span>
+      <FaStarHalf />
+    </span>
+  );
   const stars = (num) => {
     const arr = [];
     for (let i = 1; i <= num; i++) {
@@ -14,15 +24,14 @@ export default function HotelCard(props) {
     }
     return arr;
   };
-
   // 5-6 => "Decent"
   // 6-7 => ""
   // 7-8 => "Good"
   // 8-9 => "Very Good"
   // 9-10 => "Wonderful"
 
-  const slashIndex = props.rating.indexOf("/");
-  const rating = +props.rating.slice(0, slashIndex);
+  const slashIndex = props.reviews.indexOf("/");
+  const rating = +props.reviews.slice(0, slashIndex);
   let reaction;
   if (rating >= 5 && rating < 6) {
     reaction = "Decent";
@@ -35,34 +44,43 @@ export default function HotelCard(props) {
   } else if (rating >= 9 && rating <= 10) {
     reaction = "Wonderful";
   }
+
   const showRecomendation = rating >= 8 ? true : false;
 
   return (
-    <div className="hotelgrid">
-      <div className="Hotelcard">
-        <img src={props.imageURL} alt={"profile_img"} className="hotelimg" />
-        <div>
-          <p className="hotelname">{props.name}</p>
-          <h3
-            style={{
-              background:
-                rating < 7 ? "orange" : rating < 9 ? "yellow" : "green",
-            }}
-          >
-            {stars(props.stars)}
-          </h3>
-          <p className="hoteldesc">{props.description}</p>
+    <>
+      <div className="hotelcards">
+        <div className="first">
+          <img src={props.imageURL}></img>
+          <h3>{props.caption}</h3>
+          <h4>{stars(props.stars)}</h4>
+          <p>{props.description}</p>
           <p>
-            <span className="hotelrat"> {props.rating} </span>{" "}
+            {/* <span className="hotelrat">{props.reviews}</span> {""} */}
             <span style={{ color: "gray" }}>{reaction} </span>
-            <span style={{ color: "gray" }}>({props.reviews} </span>)
+            {/* <span style={{ color: "gray" }}>({props.reviews} </span>) */}
           </p>
+          <p>{props.reviews}</p>
           {/* 1. nacin uslovnog prikazivanja (Conditional rendering) */}
           {/* {showRecomendation && <p>Recomendation</p>} */}
           {/* 2. nacin uslovnog prikazivanja (Conditional rendering) */}
-          {showRecomendation ? <p>Recomendation</p> : <></>}
+          <p style={{ color: "red" }}>
+            {showRecomendation ? <p>*Recomendation</p> : <></>}
+          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 }
+
+export default HotelCard;
+
+// <div className="hotelcards">
+// <div className="prvi">
+//   <img src={props.imageURL}></img>
+//   <h1>{props.caption}</h1>
+//   {/* <FaStar/> <FaStar/> <FaStar/>  */}
+//   <p>{props.description}</p>
+//   <p>{props.reviews}</p>
+// </div>
+// </div>
