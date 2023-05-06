@@ -1,16 +1,15 @@
 import { useState } from "react";
 import "./Login.css";
 import axios from "axios";
+import { BASE_URL } from "../../config/api";
+import { useNavigation } from "react-router-dom";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   async function login(data) {
     try {
-      const user = await axios.post(
-        "https://nit-backend.onrender.com/users/login",
-        data
-      );
+      const user = await axios.post(`${BASE_URL}/users/login`, data);
       const userInfo = await user.data;
       console.log(userInfo);
     } catch (err) {
@@ -47,8 +46,8 @@ export function Login() {
         <label className="label">Password</label>
         <input
           className="input"
-          type="password "
-          name="password "
+          type="password"
+          name="password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
