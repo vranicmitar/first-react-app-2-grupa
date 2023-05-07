@@ -1,0 +1,28 @@
+.glavni {
+  margin-top: 50px;
+}
+
+.container {
+  width: 75%;
+  /* background-color: red; */
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.container h2 {
+  margin-left: -20px;
+}
+
+.container li {
+  font-weight: 100;
+}
+.container img {
+  width: 550px;
+  height: 300px;
+}
+
+.glavni button {
+  position: absolute;
+  left: 67%;
+  top: 50%;
+}

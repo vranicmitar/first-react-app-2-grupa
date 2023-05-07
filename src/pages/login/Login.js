@@ -2,30 +2,37 @@ import { useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import { BASE_URL } from "../../config/api";
-import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  async function login(data) {
+  const navigation = useNavigate();
+  async function loginUser(data) {
     try {
       const user = await axios.post(`${BASE_URL}/users/login`, data);
       const userInfo = await user.data;
       console.log(userInfo);
+      // console.log(userInfo.token);
+      localStorage.setItem("token", userInfo.token);
+      navigation("/");
     } catch (err) {
       console.log(err.response.data.err);
+      localStorage.removeItem("token");
     }
   }
 
   function handleClick(e) {
     e.preventDefault();
-    login({ email, password });
+    loginUser({
+      email,
+      password,
+    });
   }
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   //   const [userInput, setUserInput] = useState({
   //     email: "",
-  //     password: "",
-  //   }); -->BOLJA PRAXA
+  //     password:""
+  //   })
 
   return (
     <div className="cointener">
@@ -48,11 +55,11 @@ export function Login() {
           className="input"
           type="password"
           name="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-          placeholder="Password"
           required
         ></input>
         <button id="login" onClick={handleClick}>
