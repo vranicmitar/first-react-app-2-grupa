@@ -26,3 +26,24 @@
   left: 67%;
   top: 50%;
 }
+
+.second {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 55px;
+}
+
+.div {
+  margin: auto;
+  width: 75%;
+  height: 250px;
+}
+.div h1 {
+  padding-top: 15px;
+}
+
+.second a {
+  text-decoration: none;
+  font-weight: 700;
+}

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export function Login() {
   const navigation = useNavigate();
+  const [message, setMessage] = useState("");
   async function loginUser(data) {
     try {
       const user = await axios.post(`${BASE_URL}/users/login`, data);
@@ -14,9 +15,11 @@ export function Login() {
       // console.log(userInfo.token);
       localStorage.setItem("token", userInfo.token);
       navigation("/");
+      setMessage("Uspesno ste ulogovali !!!");
     } catch (err) {
       console.log(err.response.data.err);
       localStorage.removeItem("token");
+      setMessage(err.response.data.err);
     }
   }
 
@@ -38,6 +41,7 @@ export function Login() {
     <div className="cointener">
       <form>
         <h1>Login</h1>
+        <h4>{message && message}</h4>
         <label className="label">Email</label>
         <input
           className="input"
