@@ -26,22 +26,22 @@ function Logo() {
         <h1>Hotels.com makes it easy and rewarding. Always</h1>
         <div className="second">
           <section>
-            <h5>Reward yourself your way</h5>
+            <h4>Reward yourself your way</h4>
             <p>Stay where you want, when you want, and get rewarded</p>
             <a href="" onClick={() => navigation("/about-us ")}>
               Learn About Us
             </a>
           </section>
           <section>
-            <h5>Unlock instant savings</h5>
+            <h4>Unlock instant savings</h4>
             <p>Save an average of 15% on thousands of hotels</p>
             <a href="" onClick={() => navigation("/register ")}>
               Sign up,it's free
             </a>
           </section>
           <section>
-            <h5>Reward yourself your way</h5>
-            <p>Stay where you want, when you want, and get rewarded</p>
+            <h4>Free cancellation</h4>
+            <p>Flexible bookings on most hotels*</p>
           </section>
         </div>
       </div>

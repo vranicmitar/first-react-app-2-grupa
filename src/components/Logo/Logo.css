@@ -42,6 +42,12 @@
 .div h1 {
   padding-top: 15px;
 }
+.second a:hover {
+  text-decoration: underline;
+}
+.second p {
+  font-size: 14px;
+}
 
 .second a {
   text-decoration: none;
