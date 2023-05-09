@@ -2,8 +2,17 @@ import React from "react";
 import PersonCard from "../../components/Cards/PersonCard/PersonCard";
 import persons from "../../common/persons.json";
 import "./AboutUs.css";
+import axios from "axios";
 
 export default function AboutUs() {
+  const token = localStorage.getItem("token");
+  async function getUsers() {
+    try {
+      const users = await axios.get(`$`{});
+    } catch (err) {
+      console.log(err.response.data.err);
+    }
+  }
   return (
     <div className="about-us-container">
       {persons.map((person) => (

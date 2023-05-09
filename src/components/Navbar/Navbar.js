@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "../../context/AppContext";
 
 function Navbar(props) {
+  const { token, setToken } = useContext(AppContext);
   const acitveStyles = {
     backgroundColor: "lightblue",
     padding: "7px",
@@ -16,51 +18,61 @@ function Navbar(props) {
     color: "#fefefe",
     margin: "20px",
   };
+
+  useEffect(() => {}, [token]);
   return (
     <header className="header">
-      <NavLink
-        to={"/"}
-        style={({ isActive }) => (isActive ? acitveStyles : styles)}
-        className="logo"
-      >
-        <h1 style={{ fontFamily: "Arial" }}>Logo</h1>
-      </NavLink>
-      <NavLink
-        to={"/login"}
-        style={({ isActive }) => (isActive ? acitveStyles : styles)}
-      >
-        <h1 style={{ fontFamily: "Arial" }}>Login</h1>
-      </NavLink>
-      <NavLink
-        to={"/register"}
-        style={({ isActive }) => (isActive ? acitveStyles : styles)}
-      >
-        <h1 style={{ fontFamily: "Arial" }}>Register</h1>
-      </NavLink>
-      <NavLink
-        to={"/about-us"}
-        style={({ isActive }) => (isActive ? acitveStyles : styles)}
-      >
-        <h1 style={{ fontFamily: "Arial" }}>About Us</h1>
-      </NavLink>
-      <NavLink
-        to={"/hotels"}
-        style={({ isActive }) => (isActive ? acitveStyles : styles)}
-      >
-        <h1 style={{ fontFamily: "Arial" }}>Hotels</h1>
-      </NavLink>
-      <NavLink
-        to={"/teams"}
-        style={({ isActive }) => (isActive ? acitveStyles : styles)}
-      >
-        <h1 style={{ fontFamily: "Arial" }}>Teams</h1>
-      </NavLink>
-      <NavLink
-        to={"/quotes"}
-        style={({ isActive }) => (isActive ? acitveStyles : styles)}
-      >
-        <h1 style={{ fontFamily: "Arial" }}>Quotes</h1>
-      </NavLink>
+      {token ? (
+        <>
+          <NavLink
+            to={"/about-us"}
+            style={({ isActive }) => (isActive ? acitveStyles : styles)}
+          >
+            <h1 style={{ fontFamily: "Arial" }}>About Us</h1>
+          </NavLink>
+          <NavLink
+            to={"/hotels"}
+            style={({ isActive }) => (isActive ? acitveStyles : styles)}
+          >
+            <h1 style={{ fontFamily: "Arial" }}>Hotels</h1>
+          </NavLink>
+          <NavLink
+            to={"/teams"}
+            style={({ isActive }) => (isActive ? acitveStyles : styles)}
+          >
+            <h1 style={{ fontFamily: "Arial" }}>Teams</h1>
+          </NavLink>
+          <NavLink
+            to={"/quotes"}
+            style={({ isActive }) => (isActive ? acitveStyles : styles)}
+          >
+            <h1 style={{ fontFamily: "Arial" }}>Quotes</h1>
+          </NavLink>
+          <button style={{ styles }}>Log Out</button>
+        </>
+      ) : (
+        <>
+          <NavLink
+            to={"/"}
+            style={({ isActive }) => (isActive ? acitveStyles : styles)}
+            className="logo"
+          >
+            <h1 style={{ fontFamily: "Arial" }}>Logo</h1>
+          </NavLink>
+          <NavLink
+            to={"/login"}
+            style={({ isActive }) => (isActive ? acitveStyles : styles)}
+          >
+            <h1 style={{ fontFamily: "Arial" }}>Login</h1>
+          </NavLink>
+          <NavLink
+            to={"/register"}
+            style={({ isActive }) => (isActive ? acitveStyles : styles)}
+          >
+            <h1 style={{ fontFamily: "Arial" }}>Register</h1>
+          </NavLink>
+        </>
+      )}
     </header>
   );
 }

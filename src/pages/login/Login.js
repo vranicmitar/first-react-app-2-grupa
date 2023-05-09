@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import { BASE_URL } from "../../config/api";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/AppContext";
 
 export function Login() {
   const navigation = useNavigate();
+  const { setToken } = useContext(AppContext);
+
   const [message, setMessage] = useState("");
   async function loginUser(data) {
     try {
@@ -14,6 +17,7 @@ export function Login() {
       console.log(userInfo);
       // console.log(userInfo.token);
       localStorage.setItem("token", userInfo.token);
+      setToken(userInfo.token);
       navigation("/");
       setMessage("Uspesno ste ulogovali !!!");
     } catch (err) {
