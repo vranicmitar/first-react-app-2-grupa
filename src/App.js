@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./App.css";
 import { Navbar } from "./components/Navbar/Navbar";
 import Form from "./components/Form/Form";
@@ -8,9 +8,19 @@ import Hotels from "./pages/Hotels/Hotels";
 import Teams from "./pages/Teams/Teams";
 import Quotes from "./pages/Quotes/Quotes";
 import Hotel from "./pages/hotel/Hotel";
-import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/Register";
+import { Login } from "./pages/login/Login";
+import { AppContext } from "./context/AppContext";
 import { Logo } from "./components/Logo/Logo";
+
+// const poruke = [
+//   "Danas je subota",
+//   "U subotu je lepo vreme",
+//   "Subota je dan za odmor",
+//   "Subota je dan za kupovinu",
+//   "Subota je dan za druzenje",
+//   "Subota je dan za kafu",
+// ];
 
 export const BASE_URL = "https://api.quotable.io";
 
@@ -32,6 +42,8 @@ function App() {
   //   const reversed = _arr.reverse();
   //   setArr(reversed);
   // };
+
+  const { token } = useContext(AppContext);
 
   return (
     //  React.createElement("p", {}, "Neki paragraf");
@@ -90,7 +102,7 @@ function App() {
         </div> */}
       <Navbar />
       <Routes>
-        <Route path="/" element={<Logo />} />
+        <Route path="/" element={token ? <Logo /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about-us" element={<AboutUs />} />

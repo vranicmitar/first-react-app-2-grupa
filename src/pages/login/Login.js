@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import { BASE_URL } from "../../config/api";
@@ -9,7 +9,6 @@ export function Login() {
   const navigation = useNavigate();
   const { setToken } = useContext(AppContext);
 
-  const [message, setMessage] = useState("");
   async function loginUser(data) {
     try {
       const user = await axios.post(`${BASE_URL}/users/login`, data);
@@ -19,11 +18,10 @@ export function Login() {
       localStorage.setItem("token", userInfo.token);
       setToken(userInfo.token);
       navigation("/");
-      setMessage("Uspesno ste ulogovali !!!");
     } catch (err) {
       console.log(err.response.data.err);
       localStorage.removeItem("token");
-      setMessage(err.response.data.err);
+      setToken(null);
     }
   }
 
@@ -45,7 +43,6 @@ export function Login() {
     <div className="cointener">
       <form>
         <h1>Login</h1>
-        <h4>{message && message}</h4>
         <label className="label">Email</label>
         <input
           className="input"
@@ -70,7 +67,7 @@ export function Login() {
           }}
           required
         ></input>
-        <button id="login" onClick={handleClick}>
+        <button id="login" onClick={handleClick} className="batn">
           Login
         </button>
       </form>
