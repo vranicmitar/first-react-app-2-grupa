@@ -12,6 +12,7 @@ import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
 import { AppContext } from "./context/AppContext";
 import { Logo } from "./components/Logo/Logo";
+import Person from "./pages/about/About";
 
 // const poruke = [
 //   "Danas je subota",
@@ -110,6 +111,7 @@ function App() {
         <Route path="/teams" element={<Teams />} />
         <Route path="/quotes" element={<Quotes />} />
         <Route path="/hotels/:id" element={<Hotel />} />
+        <Route path="/persons/:id" element={<Person />} />
       </Routes>
     </>
   );

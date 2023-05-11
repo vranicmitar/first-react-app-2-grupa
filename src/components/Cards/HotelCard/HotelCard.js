@@ -50,7 +50,7 @@ function HotelCard(props) {
   return (
     <>
       <div className="hotelcards">
-        <div className="first">
+        <div className="firsttt">
           <img src={props.imageURL}></img>
           <h3>{props.caption}</h3>
           <h4>{stars(props.stars)}</h4>
