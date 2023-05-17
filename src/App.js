@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import { Navbar } from "./components/Navbar/Navbar";
 import Form from "./components/Form/Form";
@@ -12,107 +12,88 @@ import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
 import { AppContext } from "./context/AppContext";
 import { Logo } from "./components/Logo/Logo";
-import Person from "./pages/about/About";
-
-// const poruke = [
-//   "Danas je subota",
-//   "U subotu je lepo vreme",
-//   "Subota je dan za odmor",
-//   "Subota je dan za kupovinu",
-//   "Subota je dan za druzenje",
-//   "Subota je dan za kafu",
-// ];
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Footer from "./components/Footer/Footer";
+import PersonCard from "./components/Cards/PersonCard/PersonCard";
+// import UserOne from "./pages/AboutUs/User/UserOne";
+// MUI - Material UI
 
 export const BASE_URL = "https://api.quotable.io";
 
 function App() {
-  // const [count, setCount] = React.useState(0);
   const [count, setCount] = useState(0);
-  // const [arr, setArr] = useState(poruke);
-  // setCount je metoda pomocu koje menjamo vrednost count state_a:
   const increaseCount = () => {
     setCount(count + 1);
   };
   const decreaseCount = () => {
     setCount(count - 1);
   };
-  // const x = 10;
 
-  // const reverseArr = () => {
-  //   const _arr = [...arr];
-  //   const reversed = _arr.reverse();
-  //   setArr(reversed);
-  // };
-
-  const { token } = useContext(AppContext);
+  const { token, setToken } = useContext(AppContext);
+  useEffect(() => {
+    const localToken = localStorage.getItem("token");
+    setToken(localToken);
+  }, []);
 
   return (
-    //  React.createElement("p", {}, "Neki paragraf");
     <>
-      {" "}
-      {/* Fragment - najcesce se koristi za wrappovanje */}
-      {/* <div className="App"> */}
-      {/* <Navbar><p>Samo za primer</p></Navbar>
-        <Greeting appName={"Our First App"} username={"Bakir Ujkanovic"} /> */}
-      {/* <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 250px)",
-            justifyContent: "center",
-            gridAutoRows: "minmax(420px, auto)",
-            gridGap: "40px",
-          }}
-        > */}
-      {/* <div>
-            <button style={{ width: "40px" }} onClick={decreaseCount}>
-              -
-            </button>
-            <p>{count}</p>
-            <button
-              style={{ width: "40px" }}
-              onClick={() => {
-                console.log("povecanje");
-                setCount(count + 1);
-              }}
-            >
-              +
-            </button>
-          </div> */}
-      {/* </div> */}
-      {/* <div
-          style={{
-            height: "200px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "10px",
-          }}
-        >
-          <button
-            onClick={() => {
-              reverseArr();
-              console.log("okrenuo se niz");
-            }}
-          >
-            Promeni raspored poruka
-          </button>
-          {arr.map((poruka) => (
-            <p>{poruka}</p>
-          ))}
-        </div> */}
       <Navbar />
-      <Routes>
-        <Route path="/" element={token ? <Logo /> : <Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/hotels" element={<Hotels />} />
-        <Route path="/teams" element={<Teams />} />
-        <Route path="/quotes" element={<Quotes />} />
-        <Route path="/hotels/:id" element={<Hotel />} />
-        <Route path="/persons/:id" element={<Person />} />
-      </Routes>
+      <main style={{ minHeight: "75vh" }}>
+        <Routes>
+          <Route path="/" element={token ? <Logo /> : <Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/about-us"
+            element={
+              <ProtectedRoute>
+                <AboutUs />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/aboutus:email"
+            element={
+              <ProtectedRoute>
+                <PersonCard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/hotels"
+            element={
+              <ProtectedRoute>
+                <Hotels />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/teams"
+            element={
+              <ProtectedRoute>
+                <Teams />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/quotes"
+            element={
+              <ProtectedRoute>
+                <Quotes />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/hotels/:id"
+            element={
+              <ProtectedRoute>
+                <Hotel />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </main>
+      <Footer />
     </>
   );
 }

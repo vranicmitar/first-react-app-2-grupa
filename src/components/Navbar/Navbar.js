@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import "./Navbar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
-
+import { Button } from "@mui/material";
 function Navbar(props) {
   const { token, setToken } = useContext(AppContext);
+  const navigation = useNavigate();
   const acitveStyles = {
     backgroundColor: "lightblue",
     padding: "7px",
@@ -24,6 +25,13 @@ function Navbar(props) {
     <header className="header">
       {token ? (
         <>
+          <NavLink
+            to={"/"}
+            style={({ isActive }) => (isActive ? acitveStyles : styles)}
+            className="logo"
+          >
+            <h1 style={{ fontFamily: "Arial" }}>Logo</h1>
+          </NavLink>
           <NavLink
             to={"/about-us"}
             style={({ isActive }) => (isActive ? acitveStyles : styles)}
@@ -48,7 +56,26 @@ function Navbar(props) {
           >
             <h1 style={{ fontFamily: "Arial" }}>Quotes</h1>
           </NavLink>
-          <button style={{ styles }}>Log Out</button>
+          {/* <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              setToken(null);
+              navigation("/login");
+            }}
+          >
+            Log Out
+          </button> */}
+          <Button
+            variant="contained"
+            onClick={() => {
+              localStorage.removeItem("token");
+              setToken(null);
+              navigation("/login");
+            }}
+            style={{ width: "100px" }}
+          >
+            Log Out
+          </Button>
         </>
       ) : (
         <>

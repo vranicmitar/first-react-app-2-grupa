@@ -1,32 +1,20 @@
 import React from "react";
 import "./PersonCard.css";
-import { FaGithub } from "react-icons/fa";
 
-export default function PersonCard({
-  imageURL,
-  fullName,
-  location,
-  description,
-  goToRepositories,
-}) {
+export default function PersonCard({ imgUrl, name, desc, residency, email }) {
   return (
-    <div className="card">
-      <div className="firstPart">
-        <img src={imageURL} alt={"profile_img"} className="img" />
-        <h1>{fullName}</h1>
-        <h3>{location}</h3>
+    <>
+      <div className="card">
+        <div className="firstPart">
+          <img src={imgUrl} alt={"profile_img"} className="img" />
+          <h3>{name}</h3>
+          <h3>{residency}</h3>
+        </div>
+        <div className="secondPart">
+          <p id="email">{email}</p>
+          <p style={{ fontSize: "10px" }}>{desc}</p>
+        </div>
       </div>
-      <div className="secondPart">
-        <p>{description}</p>
-        <a
-          href={goToRepositories}
-          target="blank"
-          style={{ color: "darkblue" }}
-          className="gitHub"
-        >
-          <FaGithub style={{ width: "40px", height: "40px", color: "black" }} />
-        </a>
-      </div>
-    </div>
+    </>
   );
 }

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 
 export function Login() {
+  const [message, setMessage] = useState("");
   const navigation = useNavigate();
   const { setToken } = useContext(AppContext);
 
@@ -17,11 +18,13 @@ export function Login() {
       // console.log(userInfo.token);
       localStorage.setItem("token", userInfo.token);
       setToken(userInfo.token);
+      console.log(userInfo.token);
       navigation("/");
     } catch (err) {
       console.log(err.response.data.err);
       localStorage.removeItem("token");
       setToken(null);
+      setMessage(err.response.data.err);
     }
   }
 
@@ -43,6 +46,7 @@ export function Login() {
     <div className="cointener">
       <form>
         <h1>Login</h1>
+        <p>{message}</p>
         <label className="label">Email</label>
         <input
           className="input"
